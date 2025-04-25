@@ -1,0 +1,902 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Portfólio | Marcos Vinicius</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+  <link rel="icon" type="image/png" href="./logo.png">
+  <style>
+    :root {
+      --cor-primaria: #3f0d75;
+      --cor-secundaria: #1f1f2e;
+      --cor-destaque: #1b74e4;
+      --cor-clara: #f4f4f4;
+    }
+    body {
+      background-color: var(--cor-secundaria);
+      color: white;
+    }
+    .modo-claro {
+      background-color: var(--cor-clara);
+      color: black;
+    }
+    .foto-lateral {
+      max-width: 300px;
+      border-radius: 20px;
+    }
+    .icone-habilidade {
+      font-size: 2rem;
+      margin: 0.5rem;
+    }
+    .card-hover:hover .tecnologia {
+      opacity: 1;
+    }
+    .tecnologia {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.7);
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      transition: opacity 0.3s;
+      border-radius: 0.5rem;
+    }
+    .custom-cursor {
+      width: 20px;
+      height: 20px;
+      border: 2px solid #6f42c1;
+      border-radius: 50%;
+      position: fixed;
+      pointer-events: none;
+      transform: translate(-50%, -50%);
+      transition: transform 0.1s ease, background-color 0.2s ease;
+      z-index: 9999;
+      animation: pulse 2s infinite;
+    }
+    @keyframes pulse {
+      0% { box-shadow: 0 0 0 0 rgba(111, 66, 193, 0.4); }
+      70% { box-shadow: 0 0 0 10px rgba(111, 66, 193, 0); }
+      100% { box-shadow: 0 0 0 0 rgba(111, 66, 193, 0); }
+    }
+    .click-effect {
+      position: fixed;
+      width: 20px;
+      height: 20px;
+      background-color: rgba(111, 66, 193, 0.5);
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 9999;
+      transform: translate(-50%, -50%) scale(1);
+      opacity: 0;
+      transition: transform 0.3s ease, opacity 0.3s ease;
+    }
+    body.light-mode .click-effect {
+      background-color: rgba(75, 59, 255, 0.5);
+    }
+    /* Ajustes no card para combinar com o design do site */
+    /* Ajustes no card para combinar com o design do site */
+    #projetos-sites .card {
+      background-color: #1e1e1e;  /* Cor mais escura para o fundo do card */
+      border: 1px solid #333;     /* Borda sutil para destacar o card */
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);  /* Sombra mais suave */
+      border-radius: 8px;  /* Bordas arredondadas */
+    }
+
+    #projetos-sites .card-body {
+      padding: 2rem;
+      color: #f0f0f0;  /* Cor da letra para todo o texto do card, agora mais clara */
+    }
+
+    #projetos-sites .card-title {
+      color: #eaeaea;  /* Cor de título mais clara */
+    }
+
+    #projetos-sites .embed-responsive-item {
+      border-radius: 8px; /* Bordas arredondadas para o vídeo */
+    }
+
+    #projetos-sites .bi {
+      color: #eaeaea; /* Cor dos ícones para ficar visível no fundo escuro */
+    }
+
+    /* Ajuste para o fundo da seção */
+    #projetos-sites {
+      background-color: #121212;  /* Cor de fundo escura para combinar com o modo escuro */
+      padding: 5rem 0;
+    }
+
+        /* Estilos para a seção de planilhas */
+    #planilhas-excel {
+      background-color: #121212;  /* Cor de fundo escura para a seção */
+      color: #eaeaea;  /* Cor clara para o texto */
+      padding-top: 5rem;
+      padding-bottom: 5rem;
+    }
+
+    #planilhas-excel .card {
+      background-color: #1f1f1f;  /* Fundo escuro no card */
+      border: none;
+      border-radius: 8px;  /* Bordas arredondadas */
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);  /* Sombra suave para dar profundidade */
+    }
+
+    #planilhas-excel .card-body {
+      padding: 2rem;
+    }
+
+    #planilhas-excel .card-title {
+      font-size: 1.5rem;
+      color: #f0f0f0;  /* Cor do título mais clara */
+    }
+
+    #planilhas-excel .card-text {
+      font-size: 1rem;
+      color: #d1d1d1;  /* Cor do texto mais suave */
+    }
+
+    #planilhas-excel img {
+      max-width: 100%;
+      border-radius: 8px;  /* Bordas arredondadas para a imagem */
+    }
+
+    #planilhas-excel .btn-outline-light {
+      border-color: #eaeaea;  /* Cor da borda do botão */
+      color: #eaeaea;  /* Cor do texto do botão */
+      font-size: 1.1rem;
+      transition: all 0.3s ease;
+    }
+
+    #planilhas-excel .btn-outline-light:hover {
+      background-color: #eaeaea;  /* Fundo claro ao passar o mouse */
+      color: #121212;  /* Texto escuro */
+      border-color: #121212;  /* Borda escura */
+    }
+
+    /* Responsividade */
+    @media (max-width: 767px) {
+      #planilhas-excel .card-body {
+        padding: 1.5rem;
+      }
+
+      #planilhas-excel .btn-lg {
+        font-size: 1rem;  /* Ajuste do tamanho do botão para dispositivos menores */
+      }
+    }
+  </style>
+</head>
+<body>
+  <div id="particles-js" style="position: fixed; z-index: -1; width: 100%; height: 100%;"></div>
+
+  <nav id="navbar" class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top shadow">
+    <div class="container">
+      <a class="navbar-brand d-flex align-items-center" href="#">
+        <img src="./logo.png" alt="Logo" width="30" height="30" class="me-2">
+        Marcos Carreiro
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+        <ul class="navbar-nav">
+          <li class="nav-item"><a class="nav-link" href="#sobre">Sobre Mim</a></li>
+          <li class="nav-item"><a class="nav-link" href="#formacoes">Formação</a></li>
+          <li class="nav-item"><a class="nav-link" href="#habilidades">Habilidades</a></li>
+          <li class="nav-item"><a class="nav-link" href="#experiencia">Experiência</a></li>
+          <li class="nav-item"><a class="nav-link" href="#python">Python</a></li>
+          <li class="nav-item"><a class="nav-link" href="#projetos">Sites</a></li>
+          <li class="nav-item"><a class="nav-link" href="#planilhas">Planilhas Excel</a></li>
+          <li class="nav-item"><a class="nav-link" href="#figma">Figma</a></li>
+          <li class="nav-item"><a class="nav-link" href="#dashboards">Dashboards</a></li>
+          <li class="nav-item"><a class="nav-link" href="#aplicacao-whatsapp">Aplicação</a></li>
+          <li class="nav-item"><a class="nav-link" href="#contato">Contato</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- SEÇÃO SOBRE MIM -->
+<section id="sobre" class="container py-5 text-light">
+  <div class="d-flex justify-content-between align-items-center mb-4">
+    <h1>Marcos Vinicius Hernandes Da Silva Carreiro</h1>
+    <!--<button id="toggleMode" class="btn btn-outline-light">Modo Claro/Escuro</button>-->
+  </div>
+
+  <div class="row align-items-center mb-5">
+    <div class="col-md-8">
+      <h2>Sobre mim</h2>
+      <p>Profissional atuante na gestão de equipes de endomarketing, com experiência no planejamento estratégico, execução e análise de iniciativas inovadoras para a comunicação interna, fortalecimento da cultura organizacional e aumento do engajamento dos colaboradores. Com uma abordagem baseada em dados, liderança eficaz e metodologias ágeis, contribuindo diretamente para a otimização dos processos e para o sucesso das estratégias corporativas.</p>
+    </div>
+    <div class="col-md-4 text-center">
+      <img src="./minhafoto.jpeg" alt="Foto Marcos" class="foto-lateral">
+    </div>
+  </div>
+</section>
+
+<!-- SEÇÃO FORMAÇÃO ACADÊMICA -->
+<section id="formacoes" class="py-5 bg-dark text-light">
+  <div class="container">
+    <h2 class="text-center mb-4">Formação Acadêmica</h2>
+
+    <div class="row justify-content-center">
+      <div class="col-md-8">
+        <div class="card bg-secondary text-light mb-3">
+          <div class="card-body">
+            <div class="d-flex align-items-center mb-3">
+              <img src="./unip logo.png" alt="Logo UNIP" height="40" class="me-3">
+              <div>
+                <h5 class="card-title mb-1">Graduação em Jogos Digitais</h5>
+                <p class="mb-0">Formação voltada para o desenvolvimento de soluções gamificadas para treinamentos corporativos e educacionais, utilizando técnicas de game design, simulações interativas e aprendizado baseado em jogos.</p>
+              </div>
+            </div>
+            <p class="card-text">UNIP — 2017 a 2019</p>
+          </div>
+        </div>
+
+        <div class="card bg-secondary text-light mb-3">
+          <div class="card-body">
+            <div class="d-flex align-items-center mb-3">
+              <img src="./anhanguera logo.png" alt="Logo Anhanguera" height="40" class="me-3">
+              <div>
+                <h5 class="card-title mb-1">Pós-Graduação em Desenvolvimento Full Stack</h5>
+                <p class="mb-0">Especialização em desenvolvimento web completo, abrangendo frontend e backend, com foco na criação de plataformas digitais, sistemas interativos e aplicações escaláveis.</p>
+              </div>
+            </div>
+            <p class="card-text">Anhanguera — 2024</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SEÇÃO HABILIDADES -->
+<section id="habilidades" class="py-5 bg-black text-light">
+  <div class="container">
+    
+    <!-- Habilidades Técnicas -->
+    <div class="mb-5">
+      <h3 class="mb-4">Habilidades Técnicas</h3>
+      <ul>
+        <li>Excel, PowerPoint e Power BI – Criação de dashboards interativos, análise de dados, relatórios visuais e apresentações estratégicas para apoio na tomada de decisões.</li>
+        <li>Desenvolvimento Web – Conhecimento em HTML, CSS e JavaScript para personalização de conteúdos interativos e responsivos.</li>
+        <li>Design e Prototipação – Uso de Figma para criação de layouts, fluxos e interfaces intuitivas com foco em experiência do usuário.</li>
+        <li>E-learning e Treinamento – Experiência com EdApp, Beedoo, Genially e Articulate 360 para desenvolvimento de conteúdos educacionais.</li>
+        <li>Desenvolvimento e Manutenção de Plataformas – Conhecimento em Visual Studio Code e Python para otimização de interfaces digitais, automação e integração com sistemas diversos.</li>
+        <li>Gestão de Projetos e Tarefas – Experiência com Trello, Asana, Monday e Jira para organização e acompanhamento de atividades, utilizando metodologias ágeis (Scrum, Kanban).</li>
+      </ul>
+    </div>
+
+    <!-- Habilidades Comportamentais -->
+    <div>
+      <h3 class="mb-4">Habilidades Comportamentais</h3>
+      <ul>
+        <li>Liderança e Gestão de Equipe – Coordenação de times em projetos estratégicos de endomarketing, desenvolvimento web e treinamento.</li>
+        <li>Planejamento e Organização – Aplicação de metodologias ágeis como PMO, Kanban e Scrum para gerenciamento de tarefas e fluxos de trabalho.</li>
+        <li>Comunicação e Apresentação – Criação e apresentação de materiais estratégicos para stakeholders e equipes.</li>
+        <li>Análise e Tomada de Decisão – Uso de métricas e KPIs para otimizar processos e estratégias de marketing interno e desenvolvimento de produtos.</li>
+        <li>Criatividade e Inovação – Desenvolvimento de soluções inovadoras para engajamento de colaboradores, aprimoramento da experiência de aprendizado e otimização de processos digitais.</li>
+      </ul>
+    </div>
+
+    <div class="d-flex flex-wrap mt-4 justify-content-center">
+      <div class="d-flex flex-column align-items-center mx-3 mb-4">
+        <i class="bi bi-file-earmark-excel icone-habilidade" title="Excel Avançado"></i>
+        <span>Excel</span>
+      </div>
+    
+      <div class="d-flex flex-column align-items-center mx-3 mb-4">
+        <i class="bi bi-easel2 icone-habilidade" title="PowerPoint"></i>
+        <span>PowerPoint</span>
+      </div>
+    
+      <div class="d-flex flex-column align-items-center mx-3 mb-4">
+        <i class="bi bi-filetype-html icone-habilidade" title="HTML"></i>
+        <span>HTML</span>
+      </div>
+    
+      <div class="d-flex flex-column align-items-center mx-3 mb-4">
+        <i class="bi bi-filetype-css icone-habilidade" title="CSS"></i>
+        <span>CSS</span>
+      </div>
+    
+      <div class="d-flex flex-column align-items-center mx-3 mb-4">
+        <i class="bi bi-filetype-js icone-habilidade" title="JavaScript"></i>
+        <span>JavaScript</span>
+      </div>
+    
+      <div class="d-flex flex-column align-items-center mx-3 mb-4">
+        <i class="bi bi-vector-pen icone-habilidade" title="Figma"></i>
+        <span>Figma</span>
+      </div>
+    
+      <div class="d-flex flex-column align-items-center mx-3 mb-4">
+        <i class="bi bi-code icone-habilidade" title="Python"></i>
+        <span>Python</span>
+      </div>
+    
+      <div class="d-flex flex-column align-items-center mx-3 mb-4">
+        <i class="bi bi-filetype-php icone-habilidade" title="PHP"></i>
+        <span>PHP</span>
+      </div>
+    
+      <div class="d-flex flex-column align-items-center mx-3 mb-4">
+        <i class="bi bi-boxes icone-habilidade" title="jQuery"></i>
+        <span>jQuery</span>
+      </div>
+    
+      <div class="d-flex flex-column align-items-center mx-3 mb-4">
+        <i class="bi bi-bootstrap icone-habilidade" title="Bootstrap"></i>
+        <span>Bootstrap</span>
+      </div>
+    
+      <div class="d-flex flex-column align-items-center mx-3 mb-4">
+        <i class="bi bi-window icone-habilidade" title="Tailwind"></i>
+        <span>Tailwind</span>
+      </div>
+    
+      <div class="d-flex flex-column align-items-center mx-3 mb-4">
+        <i class="bi bi-filetype-scss icone-habilidade" title="Sass"></i>
+        <span>Sass</span>
+      </div>
+    
+      <div class="d-flex flex-column align-items-center mx-3 mb-4">
+        <i class="bi bi-bar-chart-line icone-habilidade" title="Power BI"></i>
+        <span>Power BI</span>
+      </div>
+    
+      <!-- Novos ícones adicionados -->
+      <div class="d-flex flex-column align-items-center mx-3 mb-4">
+        <i class="bi bi-database icone-habilidade" title="SQL"></i>
+        <span>SQL</span>
+      </div>
+    
+      <div class="d-flex flex-column align-items-center mx-3 mb-4">
+        <i class="bi bi-cloud icone-habilidade" title="HostGator"></i>
+        <span>HostGator</span>
+      </div>
+    
+      <div class="d-flex flex-column align-items-center mx-3 mb-4">
+        <i class="bi bi-wordpress icone-habilidade" title="WordPress"></i>
+        <span>WordPress</span>
+      </div>
+    
+      <div class="d-flex flex-column align-items-center mx-3 mb-4">
+        <i class="bi bi-github icone-habilidade" title="GitHub"></i>
+        <span>GitHub</span>
+      </div>
+    
+      <div class="d-flex flex-column align-items-center mx-3 mb-4">
+        <i class="bi bi-git icone-habilidade" title="Git"></i>
+        <span>Git</span>
+      </div>
+
+    </div>
+    
+  </div>
+</section>
+
+
+<!-- SEÇÃO EXPERIÊNCIA PROFISSIONAL -->
+<section id="experiencia" class="py-5 bg-dark text-light">
+  <div class="container">
+    <h2 class="text-center mb-5">Experiência Profissional</h2>
+
+    <!-- Experiência 1 -->
+    <div class="d-flex flex-column flex-md-row align-items-center mb-5">
+      <img src="./lg logo.png" alt="LG"  height="60" />
+      <div class="ms-md-4">
+        <h5 class="mt-3 mt-md-0">FEV 2024 - Presente</h5>
+        <h4 class="fw-bold">LG</h4>
+        <p class="mt-2">Atuação na gestão de endomarketing para a LG, liderando estratégias voltadas para comunicação interna, engajamento de colaboradores e fortalecimento da cultura organizacional. Responsável pelo planejamento, execução e análise de ações estratégicas que promovem alinhamento entre os times e impulsionam a produtividade.</p>
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item bg-dark text-light">Gestão de equipe e organização de tarefas</li>
+          <li class="list-group-item bg-dark text-light">Criação e implementação de estratégias de endomarketing</li>
+          <li class="list-group-item bg-dark text-light">Liderança e desenvolvimento de equipe</li>
+          <li class="list-group-item bg-dark text-light">Criação de apresentações e relatórios estratégicos</li>
+          <li class="list-group-item bg-dark text-light">Tomada de decisão baseada em dados</li>
+          <li class="list-group-item bg-dark text-light">Gestão de projetos e inovação</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Experiência 2 -->
+    <div class="d-flex flex-column flex-md-row align-items-center mb-5">
+      <img src="./flash logo.png" alt="FLASH" height="60" />
+      <div class="ms-md-4">
+        <h5 class="mt-3 mt-md-0">OUT 2021 - FEV 2024</h5>
+        <h4 class="fw-bold">Teleperformance - Flash Benefícios</h4>
+        <p class="mt-2">Atuação estratégica na Teleperformance, atendendo ao cliente Flash Benefícios, com foco na análise e desenvolvimento de novos funcionários. Responsável por estruturar e otimizar o processo de integração, criar novos materiais de treinamento e garantir a manutenção das ferramentas de e-learning, assegurando um onboarding eficiente e alinhado às diretrizes da empresa.</p>
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item bg-dark text-light">Análise e desenvolvimento de novos funcionários</li>
+          <li class="list-group-item bg-dark text-light">Criação de materiais de treinamento</li>
+          <li class="list-group-item bg-dark text-light">Gestão e manutenção das ferramentas de e-learning</li>
+          <li class="list-group-item bg-dark text-light">Acompanhamento de métricas e análise de desempenho</li>
+          <li class="list-group-item bg-dark text-light">Desenvolvimento de estratégias de engajamento</li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- SEÇÃO PYTHON -->
+<section id="python" class="py-5 text-light">
+  <div class="container">
+    <h2 class="text-center mb-4 display-4 fw-bold">Tratamento de Dados com Python</h2>
+    <p class="text-center mb-4">Este código em Python carrega uma planilha Excel contendo dados de vendas, realiza o tratamento da coluna "Preço", remove o símbolo "R$", converte os valores para numéricos e faz o agrupamento por "Vendedor" e "Produto". Por fim, o código salva os dados tratados em uma nova planilha Excel.</p>
+
+    <div class="row justify-content-center">
+      <div class="col-md-8">
+        <div class="card bg-secondary text-light shadow-lg border-0">
+          <div class="card-body">
+            <h5 class="card-title fw-semibold">Código Python</h5>
+            <pre class="bg-dark text-light p-3 rounded">
+<code>import pandas as pd
+
+# Carregar a planilha 
+file_path = r'C:\Users\marco\Python\vendaDeProduto.xlsx'
+df = pd.read_excel(file_path)
+
+# Exibir as primeiras linhas para verificar o conteúdo
+print("Dados iniciais:")
+print(df.head())
+
+# Tratar a coluna 'Preço' para remover o 'R$' e converter para numérico
+df['Preço'] = df['Preço'].replace({r'R\$ ': '', ',': '.'}, regex=True).astype(float)
+
+# Exibir as primeiras linhas após o tratamento do preço
+print("\nDados após o tratamento da coluna 'Preço':")
+print(df.head())
+
+# Agrupar os dados por 'Vendedor' e calcular a soma das vendas
+vendas_por_vendedor = df.groupby('Vendedor')['Preço'].sum().reset_index()
+
+# Exibir o total de vendas por vendedor
+print("\nTotal de vendas por vendedor:")
+print(vendas_por_vendedor)
+
+# Agrupar os dados por 'Produto' e calcular a soma das vendas
+vendas_por_produto = df.groupby('Produto')['Preço'].sum().reset_index()
+
+# Exibir o total de vendas por produto
+print("\nTotal de vendas por produto:")
+print(vendas_por_produto)
+
+# Salvar o DataFrame tratado em um novo arquivo Excel (se necessário)
+df.to_excel('venda_de_produto_tratada.xlsx', index=False)
+
+print("\nArquivo tratado salvo como 'venda_de_produto_tratada.xlsx'")
+</code>
+            </pre>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="text-center mt-4">
+      <h5 class="fw-semibold">Tecnologias Utilizadas</h5>
+      <div class="d-flex justify-content-center mt-3">
+        <i class="bi bi-file-earmark-code-fill text-warning" title="Python" style="font-size: 2rem; margin: 0 10px;"></i>
+        <i class="bi bi-file-earmark-spreadsheet text-success" title="Pandas" style="font-size: 2rem; margin: 0 10px;"></i>
+        <i class="bi bi-file-earmark-excel text-success" title="Excel" style="font-size: 2rem; margin: 0 10px;"></i>
+      </div>
+    </div>
+
+    <div class="text-center mt-4">
+      <!-- Botões para download -->
+      <a href="https://docs.google.com/spreadsheets/d/1rbPKtyGalKdNl3XAEeLCtdDthnS01HwE/edit?usp=sharing&ouid=109581743992390471366&rtpof=true&sd=true" class="btn btn-outline-light btn-lg mx-2" target="_blank">Baixar Planilha Não Tratada</a>
+      <a href="https://docs.google.com/spreadsheets/d/1Z5c0fYu-Ny0TN2eZcdIhBtr4I6SlcXs8/edit?usp=sharing&ouid=109581743992390471366&rtpof=true&sd=true" class="btn btn-outline-light btn-lg mx-2" target="_blank">Baixar Planilha Tratada</a>
+    </div>
+  </div>
+</section>
+
+<!-- SEÇÃO PROJETOS SITES -->
+<section id="projetos" class="py-5 text-light">
+  <div class="container">
+    <h2 class="text-center mb-5">Trabalho Voluntário: Aceda</h2>
+
+    <!-- Projeto 1 -->
+    <div class="card mb-5 border-0 shadow-lg">
+      <div class="card-body">
+        <div class="mb-3">
+          <div class="embed-responsive embed-responsive-16by9">
+            <iframe class="embed-responsive-item" src="./video/site aceda 01.mp4" width="100%" height="400" frameborder="0" allowfullscreen></iframe>
+          </div>
+        </div>
+      </div>
+
+      <!-- Segundo Vídeo do Projeto -->
+      <div class="card-body">
+        <div class="mb-3">
+          <div class="embed-responsive embed-responsive-16by9">
+            <iframe class="embed-responsive-item" src="./video/site aceda 02.mp4" width="100%" height="400" frameborder="0" allowfullscreen></iframe>
+          </div>
+        </div>
+
+        <!-- Descrição do Projeto -->
+        <p class="mt-3">Fui responsável pelo desenvolvimento fullstack do site da ONG ACEDA, construindo uma plataforma do zero e estruturando todas as suas funcionalidades para garantir uma navegação intuitiva e acessível aos usuários. A ACEDA é uma organização focada em transferência de pequenos negócios em ascensão, oferecendo suporte estratégico, capacitação e oportunidades para empreendedores.
+
+          No backend, atuei na modelagem e gerenciamento de banco de dados, criação de sistemas de relatórios e integração com ferramentas como PHPMyAdmin e SQL. No frontend, desenvolvi interfaces funcionais e responsivas, priorizando a usabilidade e a experiência do usuário.
+          
+          Além da parte técnica, liderei uma equipe de novos desenvolvedores, organizando o fluxo de trabalho e garantindo a aplicação de boas práticas de desenvolvimento ao longo do projeto.
+          
+          Embora o site atualmente esteja fora do ar, produz vídeos demonstrativos da aplicação em funcionamento, que ilustram as principais funcionalidades e a estrutura completa do sistema.</p>
+
+        <!-- Logos das Ferramentas Utilizadas -->
+        <div class="d-flex flex-wrap justify-content-center mt-4">
+          <i class="bi bi-bootstrap" title="Bootstrap 5" style="font-size: 2rem; margin: 10px;"></i>
+          <i class="bi bi-filetype-html" title="HTML" style="font-size: 2rem; margin: 10px;"></i>
+          <i class="bi bi-filetype-js" title="JavaScript" style="font-size: 2rem; margin: 10px;"></i>
+          <i class="bi bi-window" title="Tailwind CSS" style="font-size: 2rem; margin: 10px;"></i>
+          <i class="bi bi-filetype-css" title="CSS" style="font-size: 2rem; margin: 10px;"></i>
+          <i class="bi bi-file-earmark-sass" title="Sass" style="font-size: 2rem; margin: 10px;"></i>
+          <i class="bi bi-filetype-php" title="PHP" style="font-size: 2rem; margin: 10px;"></i>
+          <i class="bi bi-database" title="SQL" style="font-size: 2rem; margin: 10px;"></i>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+
+<!-- SEÇÃO PLANILHAS EXCEL -->
+<section id="planilhas" class="py-5 bg-dark text-light">
+  <div class="container">
+    <h2 class="text-center mb-4">Planilhas em Excel</h2>
+    <div class="row justify-content-center">
+      <div class="col-md-8">
+        <div class="card mb-4 bg-dark text-light border-0 shadow-lg">
+          <div class="card-body">
+            <h5 class="card-title">Estudo de Vendas</h5>
+            <p class="card-text">Dashboard de planilha em Excel como parte de um curso útil ao aprimoramento das minhas análises de vendas. O projeto utiliza dados fictícios e apresenta indicadores como volume de vendas, com visuais interativos e recursos como tabelas e gráficos sonoros.
+            </p>
+            <img src="./vendas.png" class="img-fluid rounded mb-3" alt="Exemplo de Planilha" />
+            <a href="https://docs.google.com/spreadsheets/d/1VM3R4GJXNYi-eSzNlU7ycuKbGSe-aZ5u/edit?usp=sharing&ouid=109581743992390471366&rtpof=true&sd=true" class="btn btn-outline-light btn-lg w-100" target="_blank">Ver Planilha Completa</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- SEÇÃO PROJETOS FIGMA -->
+<section id="figma" class="py-5 bg-black text-light">
+  <div class="container">
+    <h2 class="text-center mb-5 display-5 fw-bold">Projetos em Figma</h2>
+    <div class="row justify-content-center">
+      <div class="col-lg-10">
+        <div class="card bg-secondary border-0 shadow-lg rounded-lg">
+          <div class="card-body p-4 text-light"> <!-- Adicionei a classe text-light aqui -->
+            <h5 class="card-title mb-3 fw-semibold">Projeto de Interface - App GOODAY</h5>
+            <p class="card-text mb-4">Protótipo funcional desenvolvido no Figma, com foco em experiência do usuário e design mobile first.</p>
+            <div class="ratio ratio-16x9 mb-4">
+              <iframe src="https://embed.figma.com/proto/SN0aezWwjftI5VdrJ34Pwo/APP-GOODAY?node-id=22-128&starting-point-node-id=22%3A40&embed-host=share" style="border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 12px;" allowfullscreen></iframe>
+            </div>
+            <a href="https://embed.figma.com/proto/SN0aezWwjftI5VdrJ34Pwo/APP-GOODAY?node-id=22-128&starting-point-node-id=22%3A40&embed-host=share" class="btn btn-outline-light mt-3" target="_blank">Ver Design Completo</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- SEÇÃO DASHBOARDS POWER BI -->
+<section id="dashboards" class="py-5 bg-dark text-light">
+  <div class="container">
+    <h2 class="text-center mb-4 display-4 fw-bold">Dashboards em Power BI</h2>
+    <div class="row justify-content-center">
+      <div class="col-md-6 mb-4">
+        <div class="card bg-secondary text-light shadow-lg border-0">
+          <div class="card-body">
+            <h5 class="card-title fw-semibold">Dashboard analitico de Funcionários</h5>
+            <p class="card-text mb-3">Dashboard analítico de funcionários com dados fictícios para estudo de indicadores de RH, como distribuição por setor, tempo de casa, idade média e taxas de rotatividade, facilitando análises estratégicas de gestão de pessoas.</p>
+            <img src="./pb.png" class="img-fluid rounded-3 mb-3" alt="Dashboard Power BI" />
+            <a href="https://drive.google.com/file/d/1ZztZHZsp76Cx06kGaqd3dLm6SfnKzDfX/view?usp=drive_link" class="btn btn-outline-light" target="_blank">Ver Dashboard Completo</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-6 mb-4">
+        <div class="card bg-secondary text-light shadow-lg border-0">
+          <div class="card-body">
+            <h5 class="card-title fw-semibold">Dashboard KPI</h5>
+            <p class="card-text mb-3">Dashboard para análise de KPIs com dados fictícios, reunindo indicadores-chave de desempenho como produtividade, metas alcançadas, eficiência por área e evolução mensal, com foco em análises estratégicas e tomadas de decisões rápidas.</p>
+            <img src="./pb2.png" class="img-fluid rounded-3 mb-3" alt="Dashboard Power BI" />
+            <a href="https://drive.google.com/file/d/11vqkvD-V6ZyB3EjqpKTJaXyQpOk27O0S/view?usp=sharing" class="btn btn-outline-light" target="_blank">Ver Dashboard Completo</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SEÇÃO APLICAÇÃO DE ENVIO AUTOMÁTICO NO WHATSAPP -->
+<section id="aplicacao-whatsapp" class="py-5 bg-dark text-light">
+  <div class="container">
+    <h2 class="text-center mb-4 display-4 fw-bold">Aplicação de Envio Automático de PDF e Mensagens no WhatsApp</h2>
+    <p class="text-center mb-4">Esta aplicação automatiza o envio de mensagens e arquivos PDF para números de telefone armazenados em um arquivo Excel, utilizando a biblioteca <code>Puppeteer</code> para interagir com o WhatsApp Web. Ela lê números de telefone de um arquivo Excel, faz login no WhatsApp Web, e envia o PDF especificado para os contatos de forma automatizada, incluindo controle de erro e captura de logs.</p>
+
+    <div class="row justify-content-center">
+      <div class="col-md-8">
+        <div class="card bg-secondary text-light shadow-lg border-0">
+          <div class="card-body">
+            <h5 class="card-title fw-semibold">Código da Aplicação</h5>
+            <pre class="bg-dark text-light p-3 rounded">
+<code>const puppeteer = require('puppeteer');
+const XLSX = require('xlsx');
+const path = require('path');
+const fs = require('fs');
+
+// Lê números de telefone do arquivo Excel
+function lerNumerosExcel(nomeArquivo) {
+    const workbook = XLSX.readFile(nomeArquivo);
+    const sheetName = workbook.SheetNames[0];
+    const sheet = workbook.Sheets[sheetName];
+    const dados = XLSX.utils.sheet_to_json(sheet);
+    return dados.map(row => row.telefone);
+}
+
+// Caminho do arquivo PDF a ser enviado
+const pdfPath = path.join(__dirname, '2025_ONE PAGE_MG3097NR.pdf');
+
+// Caminho do arquivo Excel
+const excelPath = path.join(__dirname, 'contato.xlsx');
+
+(async () => {
+    if (!fs.existsSync(excelPath)) {
+        console.log(`Erro: O arquivo ${excelPath} não foi encontrado.`);
+        return;
+    }
+
+    const browser = await puppeteer.launch({ headless: false });
+    const page = await browser.newPage();
+    await page.goto('https://web.whatsapp.com');
+
+    console.log('Escaneie o QR Code para continuar...');
+
+    try {
+        await page.waitForSelector('canvas[aria-label="Scan me!"]', { timeout: 60000 });
+        await page.waitForFunction(() => !document.querySelector('canvas[aria-label="Scan me!"]'), { timeout: 60000 });
+    } catch (error) {
+        console.log('QR Code não detectado ou já logado. Prosseguindo...');
+    }
+
+    try {
+        await page.waitForSelector('div[contenteditable="true"][data-tab="3"]', { timeout: 60000 });
+    } catch (error) {
+        console.log('Erro ao carregar WhatsApp Web. Verifique a conexão.');
+        await browser.close();
+        return;
+    }
+
+    console.log('Login realizado com sucesso!');
+
+    const numeros = lerNumerosExcel(excelPath);
+
+    for (const numero of numeros) {
+        console.log(`Enviando para: ${numero}`);
+        await page.goto(`https://web.whatsapp.com/send?phone=${numero}&text=`);
+
+        try {
+            await page.waitForSelector('div[contenteditable="true"]', { timeout: 30000 });
+        } catch (error) {
+            console.log(`Não foi possível abrir o chat com ${numero}. Pulando para o próximo...`);
+            continue;
+        }
+
+        await new Promise(resolve => setTimeout(resolve, 5000));
+
+        try {
+            await page.waitForSelector('span[data-icon="plus"]', { timeout: 30000, visible: true });
+            await page.click('span[data-icon="plus"]');
+            await new Promise(resolve => setTimeout(resolve, 1000));
+        } catch (error) {
+            console.log(`Falha ao encontrar o botão '+' para ${numero}. Pulando...`);
+            continue;
+        }
+
+        try {
+            await page.waitForSelector('span.xdod15v', { timeout: 30000, visible: true });
+            await page.click('span.xdod15v');
+        } catch (error) {
+            console.log(`Falha ao encontrar o botão 'Documentos' para ${numero}. Pulando...`);
+            continue;
+        }
+
+        try {
+            await new Promise(resolve => setTimeout(resolve, 2000));
+            const inputFile = await page.$('input[type="file"]');
+            if (!inputFile) {
+                console.log(`Seletores de arquivos não encontrados para ${numero}. Pulando...`);
+                return;
+            }
+
+            await inputFile.uploadFile(pdfPath);
+            console.log(`Arquivo PDF selecionado para ${numero}.`);
+        } catch (error) {
+            console.log(`Erro ao anexar arquivo para ${numero}. Pulando...`);
+            await page.screenshot({ path: `erro_anexar_arquivo_${numero}.png` });
+            continue;
+        }
+
+        try {
+            await page.waitForSelector('span[data-icon="send"]', { timeout: 10000 });
+            await page.click('span[data-icon="send"]');
+            console.log(`Arquivo enviado para ${numero}`);
+        } catch (error) {
+            console.log(`Falha ao enviar mensagem para ${numero}. Pulando...`);
+            continue;
+        }
+
+        await new Promise(resolve => setTimeout(resolve, 5000));
+    }
+
+    console.log('Envios finalizados!');
+    await browser.close();
+})();
+</code>
+            </pre>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="text-center mt-4">
+      <h5 class="fw-semibold">Tecnologias Utilizadas</h5>
+      <div class="d-flex justify-content-center mt-3">
+        <i class="bi bi-file-earmark-code-fill text-warning" title="JavaScript" style="font-size: 2rem; margin: 0 10px;"></i>
+        <i class="bi bi-terminal" title="Node.js" style="font-size: 2rem; margin: 0 10px;"></i>
+        <i class="bi bi-file-earmark-spreadsheet text-success" title="XLSX" style="font-size: 2rem; margin: 0 10px;"></i>
+        <i class="bi bi-file-earmark-pdf text-danger" title="PDF" style="font-size: 2rem; margin: 0 10px;"></i>
+        <i class="bi bi-whatsapp" title="WhatsApp Web" style="font-size: 2rem; margin: 0 10px;"></i>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="contato" class="mt-5 py-5 bg-dark text-light">
+  <div class="container">
+    <h2 class="text-center mb-4">Contato</h2>
+    <div class="row justify-content-center">
+      <div class="col-md-6">
+
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item bg-dark text-light">
+            <i class="bi bi-envelope-fill me-2"></i>
+            mvhcarreiro.2010@gmail.com
+          </li>
+          <li class="list-group-item bg-dark text-light">
+            <i class="bi bi-telephone-fill me-2"></i>
+            (11) 95618-6752
+          </li>
+          <li class="list-group-item bg-dark text-light">
+            <i class="bi bi-linkedin me-2"></i>
+            <a href="https://www.linkedin.com/in/marcos-carreiro/" 
+               target="_blank" class="text-decoration-none text-info">
+              linkedin.com/in/marcos-carreiro
+            </a>
+          </li>
+          <li class="list-group-item bg-dark text-light">
+            <i class="bi bi-github me-2"></i>
+            <a href="https://github.com/04vini" 
+               target="_blank" class="text-decoration-none text-info">
+               https://github.com/04vini
+            </a>
+          </li>
+          <li class="list-group-item bg-dark text-light">
+            <i class="bi bi-geo-alt-fill me-2"></i>
+            São Paulo - SP, Brasil
+          </li>
+        </ul>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+    <!-- Rodapé -->
+    <footer class="text-center py-4">
+      <p>Criado por Marcos Vinicius - 
+        <a href="https://www.linkedin.com/in/marcos-carreiro/" 
+           class="text-decoration-none text-light" 
+           target="_blank" 
+           rel="noopener noreferrer">
+           LinkedIn
+        </a>
+      </p>
+    </footer>
+  </div>
+
+  <script>
+    document.getElementById('toggleMode').addEventListener('click', function() {
+      document.body.classList.toggle('modo-claro');
+    });
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    particlesJS("particles-js", {
+      particles: {
+        number: { value: 70 },
+        color: { value: "#6f42c1" },
+        shape: { type: "circle" },
+        opacity: { value: 0.5 },
+        size: { value: 3 },
+        line_linked: {
+          enable: true,
+          distance: 150,
+          color: "#6f42c1",
+          opacity: 0.4,
+          width: 1
+        },
+        move: {
+          enable: true,
+          speed: 2,
+          direction: "none"
+        }
+      },
+      interactivity: {
+        detect_on: "canvas",
+        events: {
+          onhover: { enable: true, mode: "repulse" },
+          onclick: { enable: true, mode: "push" }
+        },
+        modes: {
+          repulse: { distance: 100 },
+          push: { particles_nb: 4 }
+        }
+      },
+      retina_detect: true
+    });
+  </script>
+  <div id="cursor" class="custom-cursor"></div>
+  <div id="cursor-click" class="click-effect"></div>
+  <script>
+    const cursor = document.getElementById("cursor");
+  
+    document.addEventListener("mousemove", e => {
+      cursor.style.left = `${e.clientX}px`;
+      cursor.style.top = `${e.clientY}px`;
+    });
+  
+    // Efeito ao passar por links ou botões
+    const interactiveEls = document.querySelectorAll("a, button, .btn");
+    interactiveEls.forEach(el => {
+      el.addEventListener("mouseenter", () => {
+        cursor.style.transform = "translate(-50%, -50%) scale(1.5)";
+      });
+      el.addEventListener("mouseleave", () => {
+        cursor.style.transform = "translate(-50%, -50%) scale(1)";
+      });
+    });
+  </script>
+
+  <script>
+    const clickEffect = document.getElementById("cursor-click");
+  
+    document.addEventListener("click", e => {
+      clickEffect.style.left = `${e.clientX}px`;
+      clickEffect.style.top = `${e.clientY}px`;
+      clickEffect.style.opacity = 1;
+      clickEffect.style.transform = "translate(-50%, -50%) scale(2)";
+  
+      setTimeout(() => {
+        clickEffect.style.opacity = 0;
+        clickEffect.style.transform = "translate(-50%, -50%) scale(1)";
+      }, 300);
+    });
+  </script>
+  
+</body>
+</html>

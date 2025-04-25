@@ -1,0 +1,28 @@
+# Node.js
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Diretórios de sistema
+.DS_Store
+Thumbs.db
+
+# Logs e cache
+*.log
+.cache/
+
+# Build
+dist/
+build/
+
+# Editor configs
+.vscode/
+.idea/
+*.sublime-workspace
+*.sublime-project
+
+# Ambiente
+.env
+.env.local
+.env.*.local
